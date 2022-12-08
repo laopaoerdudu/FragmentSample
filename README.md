@@ -1,5 +1,7 @@
 ##  利用 Fragment Result API 进行 Fragment 之间的通信
 
+### Use case one
+
 如果在 FragmentA 中接受 FragmentB 发送的数据，FragmentA 和 FragmentB 处于相同的层级，
 则通过 parent FragmentManager 进行通信，FragmentA 必须使用 parent FragmentManager 注册 listener。
 
@@ -10,6 +12,24 @@ parentFragmentManager.setFragmentResult(
     requestKey, // Same request key FragmentA used to register its listener
     bundleOf(key to value) // The data to be passed to FragmentA
 )
+```
+
+FragmentA 接收数据
+
+```
+parentFragmentManager.setFragmentResultListener(
+            KeyConstant.KEY_SELECTED_COUNTRY, viewLifecycleOwner
+        ) { _, bundle ->
+            view.findViewById<TextView>(R.id.tvContent).text = bundle.getString("name")
+        }
+```
+
+### Use case two
+
+如果在 FragmentA 中接收 FragmentB 发送的数据，FragmentA 是 FragmentB 的父容器，则 FragmentA 中代码应该这么写：
+
+```
+childFragmentManager.setFragmentResultListener(...)
 ```
 
 **`setReorderingAllowed(true)`**

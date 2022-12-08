@@ -10,10 +10,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        parentFragmentManager.setFragmentResultListener(KeyConstant.KEY_SELECTED_COUNTRY, viewLifecycleOwner
-//        ) { _, bundle ->
-//           view.findViewById<TextView>(R.id.tvContent).text = bundle.getString("name")
-//        }
         view.findViewById<TextView>(R.id.tvContent).text = arguments?.getString("name")
     }
 
