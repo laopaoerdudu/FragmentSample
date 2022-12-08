@@ -6,6 +6,7 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import org.junit.Test
 
+// Ref: https://developer.android.com/guide/fragments/test
 class CountriesFragmentTest {
 
     @Test
