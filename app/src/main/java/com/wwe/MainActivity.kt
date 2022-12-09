@@ -1,28 +1,56 @@
 package com.wwe
 
 import android.content.res.Configuration
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
+
+    private val textViewFragmentCount: TextView by lazy {
+        findViewById(R.id.textViewFragmentCount)
+    }
+
+    private val buttonAddFragment: Button by lazy {
+        findViewById(R.id.buttonAddFragment)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        savedInstanceState ?: run {
-            supportFragmentManager.beginTransaction()
-                .setReorderingAllowed(true)
-                .add(R.id.fragment_container_view, CountriesFragment::class.java, null)
-                .commit()
+        textViewFragmentCount.text =
+            "Fragment count in back stack: ${supportFragmentManager.backStackEntryCount}"
+        supportFragmentManager.addOnBackStackChangedListener {
+            textViewFragmentCount.text =
+                "Fragment count in back stack: ${supportFragmentManager.backStackEntryCount}"
+            val backstackEntryMessage =
+                StringBuilder("Current status of fragment transaction back stack: ${supportFragmentManager.backStackEntryCount} \n")
+            for (i in supportFragmentManager.backStackEntryCount - 1 downTo 0) {
+                backstackEntryMessage.append("${supportFragmentManager.getBackStackEntryAt(i).name} \n")
+            }
+            Log.i("WWE", backstackEntryMessage.toString())
         }
-        supportFragmentManager.setFragmentResultListener(
-            KeyConstant.KEY_SELECTED_COUNTRY, this
-        ) { _, bundle ->
+        buttonAddFragment.setOnClickListener {
+            var fragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
+            fragment = when (fragment) {
+                is FragmentOne -> {
+                    FragmentTwo()
+                }
+                is FragmentTwo -> {
+                    FragmentThree()
+                }
+                is FragmentThree -> {
+                    FragmentOne()
+                }
+                else -> {
+                    FragmentOne()
+                }
+            }
             supportFragmentManager.beginTransaction()
-                .setReorderingAllowed(true)
-                .replace(R.id.fragment_container_view, DetailFragment::class.java, bundle)
+                .replace(R.id.fragmentContainer, fragment, "TargetFragment")
+                .addToBackStack("Replace $fragment")
                 .commit()
         }
     }
