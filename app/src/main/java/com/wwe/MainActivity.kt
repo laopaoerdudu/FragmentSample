@@ -51,4 +51,19 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i("WWE", "MainActivity onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.i("WWE", "MainActivity onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i("WWE", "MainActivity onDestroy")
+    }
 }

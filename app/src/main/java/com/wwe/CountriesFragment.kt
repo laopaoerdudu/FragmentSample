@@ -16,16 +16,6 @@ class CountriesFragment : Fragment(R.layout.fragment_countries) {
         Log.i("WWE","CountriesFragment onCreate")
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.i("WWE","CountriesFragment onResume")
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        Log.i("WWE","CountriesFragment onSaveInstanceState")
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<Button>(R.id.button).setOnClickListener {
@@ -34,5 +24,35 @@ class CountriesFragment : Fragment(R.layout.fragment_countries) {
                 bundleOf("name" to "Roman") // The data to be passed to FragmentA
             )
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        Log.i("WWE","CountriesFragment onSaveInstanceState")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.i("WWE","CountriesFragment onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i("WWE","CountriesFragment onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.i("WWE","CountriesFragment onStop")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.i("WWE","CountriesFragment onDestroyView")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i("WWE","CountriesFragment onDestroy")
     }
 }
