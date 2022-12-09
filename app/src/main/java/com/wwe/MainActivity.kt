@@ -25,12 +25,6 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.addOnBackStackChangedListener {
             textViewFragmentCount.text =
                 "Fragment count in back stack: ${supportFragmentManager.backStackEntryCount}"
-            val backstackEntryMessage =
-                StringBuilder("Current status of fragment transaction back stack: ${supportFragmentManager.backStackEntryCount} \n")
-            for (i in supportFragmentManager.backStackEntryCount - 1 downTo 0) {
-                backstackEntryMessage.append("${supportFragmentManager.getBackStackEntryAt(i).name} \n")
-            }
-            Log.i("WWE", backstackEntryMessage.toString())
         }
         buttonAddFragment.setOnClickListener {
             var fragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
@@ -50,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             }
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, fragment, "TargetFragment")
-                .addToBackStack("Replace $fragment")
+                .addToBackStack(null)
                 .commit()
         }
     }
