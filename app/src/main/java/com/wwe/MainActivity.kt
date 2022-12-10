@@ -6,6 +6,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 
@@ -23,10 +24,14 @@ class MainActivity : AppCompatActivity() {
         findViewById(R.id.btnUsingCustomContract)
     }
 
+    private val tvResult: TextView by lazy {
+        findViewById(R.id.tvResult)
+    }
+
     private val requestDataLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
-                val data = result.data?.getStringExtra("data")
+                tvResult.text = result.data?.getStringExtra("data").orEmpty()
             }
         }
 
