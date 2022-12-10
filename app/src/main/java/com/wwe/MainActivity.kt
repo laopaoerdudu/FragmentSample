@@ -18,35 +18,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // 注意 FragmentFactory 的设置必须在 super.onCreate 之前，因为当 Activity 进入重建路径时，会在 super.onCreate 中使用到它。
+        supportFragmentManager.fragmentFactory = HSFragmentFactory("Roman")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        textViewFragmentCount.text =
-            "Fragment count in back stack: ${supportFragmentManager.backStackEntryCount}"
-        supportFragmentManager.addOnBackStackChangedListener {
-            textViewFragmentCount.text =
-                "Fragment count in back stack: ${supportFragmentManager.backStackEntryCount}"
-        }
-        buttonAddFragment.setOnClickListener {
-            var fragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
-            fragment = when (fragment) {
-                is FragmentOne -> {
-                    FragmentTwo()
-                }
-                is FragmentTwo -> {
-                    FragmentThree()
-                }
-                is FragmentThree -> {
-                    FragmentOne()
-                }
-                else -> {
-                    FragmentOne()
-                }
-            }
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, fragment, "TargetFragment")
-                .addToBackStack(null)
-                .commit()
-        }
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, FragmentFour("Roman"))
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
