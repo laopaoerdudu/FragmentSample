@@ -1,29 +1,59 @@
 package com.wwe
 
+import android.Manifest
+import android.content.Intent
 import android.content.res.Configuration
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
+import android.widget.Button
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
+
+    private val btnActivityResult: Button by lazy {
+        findViewById(R.id.btnActivityResult)
+    }
+
+    private val btnRequestPermissions: Button by lazy {
+        findViewById(R.id.btnRequestPermissions)
+    }
+
+    private val btnUsingCustomContract: Button by lazy {
+        findViewById(R.id.btnUsingCustomContract)
+    }
+
+    private val requestDataLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val data = result.data?.getStringExtra("data")
+            }
+        }
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            if (granted) {
+                // TODO: user allow the permission.
+            } else {
+                // TODO: user deny the permission.
+            }
+        }
+
+    private val getDataLauncher = registerForActivityResult(GetDataContract()) { data ->
+        // Handle data from SecondActivity
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        savedInstanceState ?: run {
-            supportFragmentManager.beginTransaction()
-                .setReorderingAllowed(true)
-                .add(R.id.fragment_container_view, CountriesFragment::class.java, null)
-                .commit()
+        btnActivityResult.setOnClickListener {
+            requestDataLauncher.launch(Intent(this@MainActivity, SecondActivity::class.java))
         }
-        supportFragmentManager.setFragmentResultListener(
-            KeyConstant.KEY_SELECTED_COUNTRY, this
-        ) { _, bundle ->
-            supportFragmentManager.beginTransaction()
-                .setReorderingAllowed(true)
-                .replace(R.id.fragment_container_view, DetailFragment::class.java, bundle)
-                .commit()
+        btnRequestPermissions.setOnClickListener {
+            requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+        }
+        btnUsingCustomContract.setOnClickListener {
+            getDataLauncher.launch(null)
         }
     }
 
