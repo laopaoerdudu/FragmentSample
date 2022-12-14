@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction()
                 .setReorderingAllowed(true)
                 .add(R.id.fragment_container_view, CountriesFragment::class.java, null)
+                .addToBackStack(null)
                 .commit()
         }
         supportFragmentManager.setFragmentResultListener(

@@ -14,6 +14,7 @@ class CountriesFragment : Fragment(R.layout.fragment_countries) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.i("WWE","CountriesFragment onCreate")
+        this.retainInstance = true
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
