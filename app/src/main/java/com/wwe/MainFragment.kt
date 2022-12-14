@@ -9,7 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 
-class FragmentFour(private val data: String?) : Fragment(R.layout.fragment_sample_three) {
+/**  */
+class MainFragment(private val data: String?) : Fragment(R.layout.fragment_sample_three) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

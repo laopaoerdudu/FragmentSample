@@ -7,8 +7,8 @@ class HSFragmentFactory(private val arg: Any) : FragmentFactory() {
 
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
         val clazz = loadFragmentClass(classLoader, className)
-        if (clazz == FragmentFour::class.java) {
-            return FragmentFour(arg as? String)
+        if (clazz == MainFragment::class.java) {
+            return MainFragment(arg as? String)
         }
         return super.instantiate(classLoader, className)
     }
