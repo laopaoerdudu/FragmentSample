@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">FragmentSample</string>
+    <string name="fragmentHint">%1$s\n%2$s\n\n%3$s\n%4$s %5$s</string>
+    <string name="fragmentHint1">%1$s\n\n%2$s</string>
+    <string name="first">♥</string>
+    <string name="second">♦</string>
+    <string name="third">♠</string>
+    <string name="fourth">♣</string>
+    <string name="independent">single back stack</string>
+    <string name="multiple">multiple back stack</string>
+    <string name="done">%1$s发完了</string>
+    <string name="header">女装大佬在线发牌</string>
+    <string name="clear">clear</string>
+    <string name="next">next</string>
 </resources>

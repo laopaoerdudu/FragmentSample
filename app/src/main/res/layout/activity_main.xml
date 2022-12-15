@@ -1,31 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.fragment.app.FragmentContainerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content"
+    android:name="com.wwe.HostFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/activity_color"
-    android:orientation="vertical"
-    tools:context="com.wwe.MainActivity">
-
-    <Button
-        android:id="@+id/buttonAddFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Fragment" />
-
-    <TextView
-        android:id="@+id/textViewFragmentCount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp" />
-
-    <FrameLayout
-        android:id="@+id/fragmentContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="5dp" />
-
-</LinearLayout>
+    tools:context=".MainActivity" />
