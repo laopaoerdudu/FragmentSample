@@ -18,14 +18,14 @@ class HostFragment : Fragment(R.layout.fragment_host) {
             singleStack.setOnClickListener {
                 parentFragmentManager.commit {
                     addToBackStack(null)
-                    replace<SingleStackParentFragment>(R.id.content)
+                    replace<SingleStackParentFragment>(R.id.main_content)
                 }
             }
 
             multipleStack.setOnClickListener {
                 parentFragmentManager.commit {
                     addToBackStack(null)
-                    replace<MultipleStackParentFragment>(R.id.content)
+                    replace<MultipleStackParentFragment>(R.id.main_content)
                 }
             }
         }

@@ -45,6 +45,10 @@ class MultipleStackChildFragment :
                     .italic()
                     .bold()
                     .click {
+                        /**
+                         * 0 -> 只弹出该元素以上的所有元素
+                         * POP_BACK_STACK_INCLUSIVE -> 弹出包含该元素及以上的所有元素
+                         */
                         parentFragmentManager.popBackStack(name, POP_BACK_STACK_INCLUSIVE)
                     },
                 getString(R.string.next)
@@ -54,6 +58,7 @@ class MultipleStackChildFragment :
                     .bold()
                     .click {
                         if (depth < 13) {
+                            // 这里为什么用的是 parentFragmentManager？
                             parentFragmentManager.commit {
                                 addToBackStack(name)
                                 replace(R.id.content, newInstance(name, depth + 1))
