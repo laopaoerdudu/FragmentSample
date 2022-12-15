@@ -12,4 +12,7 @@
     <color name="fragment_three_color">#03FF11</color>
     <color name="activity_color">#79FDFE</color>
     <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorRed">#CD0000</color>
+    <color name="white_75">#D4FFFFFF</color>
 </resources>

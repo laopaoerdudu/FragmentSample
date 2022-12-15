@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.wwe.databinding.FragmentHostBinding
+import com.wwe.multiple.MultipleStackParentFragment
 import com.wwe.single.SingleStackParentFragment
 
 class HostFragment : Fragment(R.layout.fragment_host) {
@@ -22,7 +23,10 @@ class HostFragment : Fragment(R.layout.fragment_host) {
             }
 
             multipleStack.setOnClickListener {
-
+                parentFragmentManager.commit {
+                    addToBackStack(null)
+                    replace<MultipleStackParentFragment>(R.id.content)
+                }
             }
         }
     }
