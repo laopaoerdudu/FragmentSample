@@ -2,6 +2,7 @@ package com.wwe
 
 class KeyConstant {
     companion object {
-        const val KEY_SELECTED_COUNTRY = "key_selected_country"
+        const val REQUEST_KEY_A = "REQUEST_KEY_A"
+        const val REQUEST_KEY_B = "REQUEST_KEY_B"
     }
 }

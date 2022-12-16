@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FragmentSample</string>
+    <string name="send_data">发送数据</string>
 </resources>
