@@ -8,13 +8,14 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.wwe.databinding.FragmentHostBinding
 import com.wwe.replace.ParentFragment
+import com.wwe.savestate.ViewModelWithSavedStateFragment
 
 class HostFragment : BaseFragment<FragmentHostBinding>(R.layout.fragment_host) {
     override fun initBinding(view: View): FragmentHostBinding = FragmentHostBinding.bind(view)
 
     override fun init(savedInstanceState: Bundle?) {
         binding.button1.setOnClickListener { jumpToFragment<ParentFragment>() }
-//        binding.button2.setOnClickListener { jumpToFragment<ViewModelWithSavedStateFragment>() }
+        binding.button2.setOnClickListener { jumpToFragment<ViewModelWithSavedStateFragment>() }
 //        binding.button3.setOnClickListener { jumpToFragment<ViewModelWithoutSavedStateFragment>() }
     }
 
