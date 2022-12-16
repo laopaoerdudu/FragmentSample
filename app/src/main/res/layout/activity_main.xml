@@ -8,12 +8,6 @@
     android:orientation="vertical"
     tools:context="com.wwe.MainActivity">
 
-    <Button
-        android:id="@+id/buttonAddFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Fragment" />
-
     <TextView
         android:id="@+id/textViewFragmentCount"
         android:layout_width="match_parent"
