@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">FragmentSample</string>
-    <string name="send_data">发送数据</string>
+    <string name="child">this is child</string>
+    <string name="button1_hint">replace fragment save view</string>
+    <string name="button2_hint">ViewModel with SaveState</string>
+    <string name="button3_hint">ViewModel without SaveState</string>
+    <string name="click">click</string>
+    <string name="save">save</string>
+    <string name="hint">请输入内容</string>
+    <string name="saved_in_viewmodel">Saved in ViewModel:%s</string>
+    <string name="text_hint">Saved in ViewModel:</string>
 </resources>
