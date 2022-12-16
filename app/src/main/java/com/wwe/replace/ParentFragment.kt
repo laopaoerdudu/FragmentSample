@@ -11,22 +11,11 @@ import com.wwe.BaseFragment
 import com.wwe.R
 import com.wwe.databinding.FragentParentBinding
 
-/**
- * 测试 replace 状态保存
- * 1. 在 EditText 内输入内容， 输入的内容会存在 [label] 中并赋值给 TextView
- * 2. 点击 click replace 该 fragment 测试
- * 3. 旋转屏幕测试
- * 结果：
- * 步骤2 返回该 fragment 后 EditText 和 TextView 均恢复到之前的状态，[label] 有值
- * 步骤3 旋转屏幕后 EditText 和 TextView 均恢复到之前的状态，[label] 无值
- *
- */
 class ParentFragment : BaseFragment<FragentParentBinding>(R.layout.fragent_parent) {
     override fun initBinding(view: View): FragentParentBinding = FragentParentBinding.bind(view)
     var label = ""
 
     override fun init(savedInstanceState: Bundle?) {
-        //打印成员状态
         Log.i(TAG, "init: $label")
 
         binding.edit.addTextChangedListener(object : TextWatcher {
