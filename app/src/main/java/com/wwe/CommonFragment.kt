@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 abstract class CommonFragment(private val title: String) : Fragment(R.layout.fragment_common) {
     lateinit var header: TextView
     lateinit var edit: TextView
-    lateinit var showSnackbar: Button
+    lateinit var showSnackBar: Button
     lateinit var update: Button
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,12 +27,12 @@ abstract class CommonFragment(private val title: String) : Fragment(R.layout.fra
         toolbar.title = title
         header = view.findViewById(R.id.header)
         edit = view.findViewById(R.id.edit)
-        showSnackbar = view.findViewById(R.id.showSnackbar)
+        showSnackBar = view.findViewById(R.id.showSnackBar)
         update = view.findViewById(R.id.update)
     }
 
     fun showSnackBar(text: String) {
-        Snackbar.make(showSnackbar, text, Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(showSnackBar, text, Snackbar.LENGTH_SHORT).show()
     }
 
     internal fun closeKeyboard(view: View) {

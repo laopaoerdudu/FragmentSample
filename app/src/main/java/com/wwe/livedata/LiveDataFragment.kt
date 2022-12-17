@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import com.google.android.material.snackbar.Snackbar
 import com.wwe.CommonFragment
 
 class LiveDataFragment : CommonFragment("LiveData") {
@@ -12,8 +13,12 @@ class LiveDataFragment : CommonFragment("LiveData") {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        edit.addTextChangedListener { viewModel.username.value = it?.toString() }
+        edit.addTextChangedListener { viewModel.updateUserName(it?.toString().orEmpty()) }
 
+        viewModel.userName.observe(viewLifecycleOwner) {
+            closeKeyboard(edit)
+            Snackbar.make(edit, it, Snackbar.LENGTH_SHORT).show()
+        }
         viewModel.headerText.observe(viewLifecycleOwner) { header.text = it }
         viewModel.showSnackBar.observe(viewLifecycleOwner) { showSnackBar(it) }
 
@@ -21,7 +26,7 @@ class LiveDataFragment : CommonFragment("LiveData") {
             closeKeyboard(edit)
             viewModel.updateHeaderClick()
         }
-        showSnackbar.setOnClickListener {
+        showSnackBar.setOnClickListener {
             viewModel.showSnackBarClick()
         }
     }

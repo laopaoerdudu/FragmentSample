@@ -36,7 +36,7 @@ class StateFlowFragment : CommonFragment("StateFlow") {
             closeKeyboard(edit)
             viewModel.updateHeaderClick()
         }
-        showSnackbar.setOnClickListener {
+        showSnackBar.setOnClickListener {
             viewModel.showSnackBarClick()
         }
     }

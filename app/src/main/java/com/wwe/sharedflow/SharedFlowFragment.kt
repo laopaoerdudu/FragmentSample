@@ -36,7 +36,7 @@ class SharedFlowFragment : CommonFragment("SharedFlow") {
             closeKeyboard(edit)
             viewModel.updateHeaderClick()
         }
-        showSnackbar.setOnClickListener {
+        showSnackBar.setOnClickListener {
             viewModel.showSnackbarClick()
         }
     }

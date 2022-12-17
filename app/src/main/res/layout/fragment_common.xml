@@ -19,7 +19,7 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:padding="10dp"
-    android:text="header"
+    android:text="Header"
     android:textSize="@dimen/sp_20" />
 
   <com.google.android.material.textfield.TextInputEditText
@@ -27,7 +27,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:hint="input header"
+    android:hint="Input header"
     android:minWidth="100dp" />
 
   <com.google.android.material.button.MaterialButton
@@ -35,14 +35,14 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:text="update header"
+    android:text="Update header"
     android:textAllCaps="false" />
 
   <com.google.android.material.button.MaterialButton
-    android:id="@+id/showSnackbar"
+    android:id="@+id/showSnackBar"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:text="show Snackbar"
+    android:text="Show SnackBar"
     android:textAllCaps="false" />
 </androidx.appcompat.widget.LinearLayoutCompat>
