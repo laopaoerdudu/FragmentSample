@@ -6,23 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!--正确示例容器-->
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/container1"
-        android:name="com.wwe.FragmentA"
+        android:id="@+id/correct"
+        android:name="com.wwe.correct.CorrectOptionFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/container2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/error"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--错误示例容器-->
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/container2"
-        android:name="com.wwe.FragmentB"
+        android:id="@+id/error"
+        android:name="com.wwe.error.ErrorOptionFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/container1" />
+        app:layout_constraintTop_toBottomOf="@id/correct" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
