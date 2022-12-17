@@ -16,7 +16,7 @@ class SharedFlowFragment : CommonFragment("SharedFlow") {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
             edit.addTextChangedListener {
-                viewModel.username.value = it?.toString() ?: ""
+                viewModel.username.value = it?.toString().orEmpty()
             }
         }
 
