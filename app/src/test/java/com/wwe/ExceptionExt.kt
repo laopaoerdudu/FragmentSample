@@ -6,14 +6,14 @@ import kotlinx.coroutines.launch
 
 /** 不需要写 CoroutineExceptionHandler 局部变量，更为优雅简洁。 */
 fun <T> CoroutineScope.rxLaunch(init: CoroutineCallBack<T>.() -> Unit) {
-    val result = CoroutineCallBack<T>().apply(init)
+    val callback = CoroutineCallBack<T>().apply(init)
     val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
-        result.onError?.invoke(exception)
+        callback.onError?.invoke(exception)
     }
     launch(coroutineExceptionHandler) {
-        val res: T? = result.onRequest?.invoke()
-        res?.let {
-            result.onSuccess?.invoke(it)
+        val event: T? = callback.onRequest?.invoke()
+        event?.let { result ->
+            callback.onSuccess?.invoke(result)
         }
     }
 }
@@ -29,7 +29,7 @@ class CoroutineCallBack<T> {
 //viewModelScope.rxLaunch<String> {
 //    onRequest = {
 //        //网络请求
-//        resposity.getData()
+//        repository.getData()
 //    }
 //    onSuccess = {
 //        //成功回调
