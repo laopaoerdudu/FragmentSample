@@ -53,6 +53,24 @@ label 代表了当前状态机的具体状态，每改变一次，就代表挂�
 因为之前修改过 label，根据该 label 来判断该继续往下走了，执行后面的逻辑。
 上面的 Callback 就是 Continuation，我觉得它在这里的意思可以翻译成继续执行剩余的代码。
 
+## Try Catch 与 CoroutineExceptionHandler 对比
+
+- 如果需要在代码的特定部分处理异常，建议在协程内部的相应代码周围使用 try / catch。
+这样， 您可以防止协程异常完成（现在已捕获异常），重试该操作和/或采取其他任意操作：”
+
+- `CoroutineExceptionHandler` 是用于全局“全部捕获”行为的最后手段。
+您无法从 CoroutineExceptionHandler 中的异常中恢复。
+当调用处理程序时，协程已经完成，并带有相应的异常。 
+通常，处理程序用于记录异常，显示某种错误消息，终止和/或重新启动应用程序。
+
+我们绝大多数时候应该使用 CoroutineExceptionHandler。
+
+协程最大的优点是可以使用同步的方法写异步代码，CoroutineExceptionHandler 有以下缺点：
+
+1，将异常处理代码与协程代码分隔开了，看上去不是同步代码。
+
+2，每次使用都要新建局部变量，不够优雅。
+
 
 
 
