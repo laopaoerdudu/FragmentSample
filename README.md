@@ -63,13 +63,92 @@ label 代表了当前状态机的具体状态，每改变一次，就代表挂�
 当调用处理程序时，协程已经完成，并带有相应的异常。 
 通常，处理程序用于记录异常，显示某种错误消息，终止和/或重新启动应用程序。
 
-我们绝大多数时候应该使用 CoroutineExceptionHandler。
+我们绝大多数时候应该使用 CoroutineExceptionHandler。CoroutineExceptionHandler 无法在代码的特定部分处理异常，
+例如针对某一个失败接口，无法在异常后进行重试或者其他特定操作。 如果你想在特定部分做异常处理的话，try-catch更适合。
+
+```
+interface ProjectApi {
+    @GET("project/tree/json")
+    suspend fun loadProjectTree(): BaseResp<List<ProjectTree>>
+
+    @GET("project/tree/jsonError")
+    suspend fun loadProjectTreeError(): BaseResp<List<ProjectTree>>
+}
+
+ suspend fun loadProjectTree() {
+        try {
+            val errorResult = service.loadProjectTreeError()
+            Log.d(TAG, "loadProjectTree errorResult: $errorResult")
+        } catch (e: Exception) {
+            Log.d(TAG, "loadProjectTree: error Exception  " + e.message)
+            e.printStackTrace()
+        }
+
+        try {
+            val result = service.loadProjectTree()
+            Log.d(TAG, "loadProjectTree: $result")
+        } catch (e: Exception) {
+            Log.d(TAG, "loadProjectTree: Exception  " + e.message)
+            e.printStackTrace()
+        }
+    }
+
+打印结果如下：
+loadProjectTree: error Exception HTTP 404 Not Found
+loadProjectTree: com.fuusy.common.network.BaseResp@57e153d
+```
 
 协程最大的优点是可以使用同步的方法写异步代码，CoroutineExceptionHandler 有以下缺点：
 
 1，将异常处理代码与协程代码分隔开了，看上去不是同步代码。
 
 2，每次使用都要新建局部变量，不够优雅。
+
+## 什么是协程的结构化并发？
+
+在 Kotlin 的协程中，全局的 GlobalScope 是一个作用域，每个协程自身也是一个作用域，新建的协程与它的父作用域存在一个级联的关系，也就是一个父子关系层次结构。
+而这级联关系主要在于：
+
+1、父作用域的生命周期持续到所有子作用域执行完；
+
+2、当结束父作用域结束时，同时结束它的各个子作用域；
+
+3、子作用域未捕获到的异常将不会被重新抛出，而是一级一级向父作用域传递，这种异常传播将导致父作用域失败，进而导致其子作用域的所有请求被取消。
+
+上面的三点也就是协程结构化并发的特性。
+
+了解了什么是协程的结构化并发，那我们就又回到 try-catch 为什么在协程中开启一个失败的子协程的情况下会失败的问题上。
+很显然，上面第3点就是这个问题的答案，子协程中未捕获的异常不会被重新抛出，而是在父子层次结构中向上传播，这种异常传播将导致父 Job 失败。
+
+## 协程异常处理的结论：
+
+1，在代码的特定部分处理异常，可使用try-catch。
+
+2，全局捕获异常，并且其中一个任务异常，其他任务不执行，可使用 CoroutineExceptionHandler，节省资源消耗。
+
+3，并行任务间互不干扰，任何一个任务失败，其他任务照常运行，可使用 SupervisorScope+async 模式。
+
+```
+viewModelScope.launch() {
+            supervisorScope {
+                try {
+                    //除数为0，抛异常
+                    val deferredFail = async { 2 / 0 }
+                    
+                    val deferred = async {
+                        2 / 1
+                        Log.d(TAG, "loadProjectTree:  2/1 ")
+                    }
+                    deferredFail.await()
+                    deferred.await()
+
+                } catch (e: Exception) {
+                    Log.d(TAG, "loadProjectTree:Exception ${e.message} ")
+                }
+            }
+        }        
+```
+
 
 
 
